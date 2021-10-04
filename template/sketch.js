@@ -6,6 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 let paint = 'black';
+let bgcolor = 255;
 
 function setup() {
   document.addEventListener("contextmenu", event => event.preventDefault());
@@ -14,12 +15,15 @@ function setup() {
 }
 
 function draw() {
-  //background(220);
 
-  
+
+  //background("white");
   stroke("black");
   line (width/2, height, width/2, pmouseY - 500);
+
+//desides the color using KeyisPressed
   AColor();
+  // makes the line(s)
   makeAThing();
   
 }
@@ -28,7 +32,8 @@ function draw() {
 
 function makeAThing(){
   strokeWeight(5);
-  if (mouseIsPressed) {
+  stroke(paint);
+  if (mouseIsPressed && mouseX <= width/2) {
     strokeWeight(6);
     
     line(mouseX, mouseY, pmouseX, pmouseY);
@@ -47,7 +52,20 @@ function makeAThing(){
 function AColor(){
  
   if (keyIsPressed){
+    if (keyCode === SHIFT){
     paint =  color(random(255), random(255), random(255));
-
+    }
+    else if (keyCode === RIGHT_ARROW){
+      paint =  color(255, random(255), random(255));
+    }
+    else if (keyCode === DOWN_ARROW){
+      paint =  color(random(255), 255, random(255));
+    }
+    else if (keyCode === LEFT_ARROW){
+      paint =  color(random(255), random(255), 255);
+    }
+    else{
+      paint = random(255) + 100;
+    }
   }
 }
