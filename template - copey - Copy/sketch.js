@@ -12,8 +12,8 @@ function setup() {
 function draw() {
   background("green");
   displayGrid();
-  fill("black");
-  rect (mouseX, mouseY, 100, 50);
+  // fill("black");
+  // rect (mouseX, mouseY, 100, 50);
 
 }
 
