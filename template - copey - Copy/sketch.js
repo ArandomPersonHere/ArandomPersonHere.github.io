@@ -1,6 +1,6 @@
 //grid demo 2D Array
 // 
-let gridSize = 25;
+let gridSize = 50;
 let grid;
 
 function setup() {
@@ -12,8 +12,24 @@ function setup() {
 function draw() {
   background("green");
   displayGrid();
-  // fill("black");
-  // rect (mouseX, mouseY, 100, 50);
+ 
+
+}
+
+function mousePressed() {
+  let cellWidth = width/gridSize;
+  let cellHeight = height/gridSize;
+
+  let cellX = Math.floor(mouseX/cellWidth);
+  let cellY = Math.floor(mouseY/cellHeight);
+
+if (grid[cellY][cellX] === 0){
+  grid [cellY][cellX] = 1;
+}
+else if (grid[cellY][cellX] === 1){
+    grid [cellY][cellX] = 0;
+
+}
 
 }
 
