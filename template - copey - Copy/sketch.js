@@ -2,6 +2,12 @@
 // 
 let gridSize = 50;
 let grid;
+let mysound;
+
+function preload(){
+  mysound = loadsound()
+
+}
 
 function setup() {
   
@@ -25,11 +31,11 @@ function mousePressed() {
 
 if (grid[cellY][cellX] === 0){
   grid [cellY][cellX] = 1;
-}
+  }
 else if (grid[cellY][cellX] === 1){
-    grid [cellY][cellX] = 0;
+  grid [cellY][cellX] = 0;
 
-}
+  }
 
 }
 
