@@ -1,6 +1,11 @@
-//grid demo 2D Array
+//grid project 
+// what i want it to do 
+// 1 - drag and play different audio filesinto different parts of the grid
+// 2 - simultainiously play audio files in a collum
+// 3 - have an auto play feature that visually dispays what collum it's playing
+// 4 - 
 // 
-let gridSize = 50;
+let gridSize = 20;
 let grid;
 let mysound;
 
@@ -16,11 +21,14 @@ function setup() {
 }
 
 function draw() {
-  background("green");
+  //background("green");
   displayGrid();
  
 
 }
+
+function 
+
 
 function keyPressed(){
   if (key === "e"){
@@ -36,42 +44,9 @@ function keyPressed(){
 }
 
 function mousePressed() {
- // mysound.play();
-
-  let cellWidth = width/gridSize;
-  let cellHeight = height/gridSize;
-
-  let cellX = Math.floor(mouseX/cellWidth);
-  let cellY = Math.floor(mouseY/cellHeight);
-
-
-
-//center
-  swap(cellX, cellY);
-  //right
-  swap(cellX +1 , cellY);
-  //left
-  swap(cellX -1 , cellY);
-  //up
-  swap(cellX, cellY+1);
-  //down
-  swap(cellX, cellY -1);
-
-  
-
+  mysound.play();
 }
-function swap(x, y){
 
-  if (x >= 0&& x< gridSize && y>=0 && y <gridSize){
-    if (grid[x][y] === 0){
-      grid [x][y] = 1;
-    }
-    else if (grid[y][x] === 1){
-      grid [y][x] = 0;
-
-    }
-  }
-}
 
 
 function displayGrid(){
@@ -80,7 +55,7 @@ function displayGrid(){
   for (let y = 0; y<gridSize; y++){
     for (let x = 0; x<gridSize; x++){
       if (grid[y][x] === 0){
-        fill("blue");
+        fill("yellow");
       }
       else if (grid[y][x] === 1){
         fill("red");
@@ -111,12 +86,12 @@ function createRandom2DArray(rows,cols, numToFill = 0){
 }
 
 
-function createEmpty2DArray(rows,cols, numToFill = 0){
+function createEmpty2DArray(rows,cols,numToFill= 0){
   let grid = [];
   for (let y = 0; y<rows; y++){
     grid.push([]);
     for (let x = 0; x<cols; x++){
-    grid[y].push(numToFill);
+      grid[y].push(numToFill);
     }
   }
   return grid;
