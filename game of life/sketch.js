@@ -6,7 +6,7 @@ let autoplay = false;
 let gun;
 
 function preload(){
-  gun = loadJSON("assets/ gosper-gun.json");
+ // gun = loadJSON("assets/ gosper-gun.json");
 
 
 
@@ -22,7 +22,7 @@ function setup() {
 function draw() {
   background(220);
   if (autoplay&& frameCount % 1 === 0) {
-  nextTurn();
+    nextTurn();
   }
   displayGrid();
 }
@@ -59,9 +59,9 @@ function keyPressed(){
   if (key === "t"){
     autoplay = !autoplay;
   }
-  if (key === "g"){
-    grid = gun;
-  }
+  // if (key === "g"){
+  //   grid = gun;
+  // }
 }
 
 function displayGrid() {
@@ -83,7 +83,7 @@ function createRandom2DArray(rows, cols) {
   for (let y=0; y<rows; y++) {
     board.push([]);
     for (let x=0; x<cols; x++) {
-      if (random(100) < 50){
+      if (random(100) < 10){
         board[y].push(1);
       }
       board[y].push(0);
