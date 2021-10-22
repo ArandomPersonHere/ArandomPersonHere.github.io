@@ -30,7 +30,7 @@ function draw() {
 function 
 
 
-function keyPressed(){
+ keyPressed(){
   if (key === "e"){
     grid = createEmpty2DArray(gridSize, gridSize);
   }
