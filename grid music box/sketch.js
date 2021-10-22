@@ -4,15 +4,18 @@
 // 2 - simultainiously play audio files in a collum
 // 3 - have an auto play feature that visually dispays what collum it's playing
 // 4 - 
+
+
 // 
 let gridSize = 20;
 let grid;
 let mysound;
 
-// function preload(){
-//   mysound = loadSound("sound_file/Socapex-Evol Online all.wav");
 
-// }
+ function preload(){
+   mysound = loadSound("sound_file/life.wav");
+
+}
 
 function setup() {
   
@@ -27,10 +30,7 @@ function draw() {
 
 }
 
-function 
-
-
- keyPressed(){
+function keyPressed(){
   if (key === "e"){
     grid = createEmpty2DArray(gridSize, gridSize);
   }
@@ -44,7 +44,23 @@ function
 }
 
 function mousePressed() {
-  mysound.play();
+  let cellWidth = width/gridSize;
+  let cellHeight = height/gridSize;
+  let cellX = Math.floor(mouseX/ cellWidth);
+  let cellY = Math.floor(mouseY/ cellHeight);
+
+
+
+  if (grid[cellY][cellX] === 0) {
+    grid[cellY][cellX] = 1;
+    mysound.play();
+  }
+  else if (grid[cellY][cellX] === 1) {
+    grid[cellY][cellX] = 0;
+  }
+  // if (grid === 1){
+  // mysound.play();
+  // }
 }
 
 
@@ -96,4 +112,3 @@ function createEmpty2DArray(rows,cols,numToFill= 0){
   }
   return grid;
 }
-
