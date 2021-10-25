@@ -12,7 +12,7 @@ let grid;
 let mysound= [];
 
 
- function preload(){
+function preload(){
    
   mysound[1] = loadSound("sound_file/life.wav");
   mysound[2] = loadSound("sound_file/hjm-tesla_sound_shot.wav");
@@ -56,7 +56,7 @@ function mousePressed() {
   let cellX = Math.floor(mouseX/ cellWidth);
   let cellY = Math.floor(mouseY/ cellHeight);
 
-  if (isPlaying){
+  if (isPlaying) {
     stop();
 
   }
