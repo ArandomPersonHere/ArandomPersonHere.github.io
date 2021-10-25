@@ -9,11 +9,15 @@
 // 
 let gridSize = 20;
 let grid;
-let mysound;
+let mysound= [];
 
 
  function preload(){
-   mysound = loadSound("sound_file/life.wav");
+   
+  mysound[1] = loadSound("sound_file/life.wav");
+  mysound[2] = loadSound("sound_file/hjm-tesla_sound_shot.wav");
+  mysound[3] = loadSound("sound_file/loseSound.wav");
+  mysound[4] = loadSound("sound_file/pcp.ogg");
 
 }
 
@@ -40,6 +44,9 @@ function keyPressed(){
   if (key === "r"){
     grid = createRandom2DArray(gridSize, gridSize);
   }
+  if (key === "p"){
+    grid[5][5] = mysound();
+  }
 
 }
 
@@ -49,18 +56,20 @@ function mousePressed() {
   let cellX = Math.floor(mouseX/ cellWidth);
   let cellY = Math.floor(mouseY/ cellHeight);
 
+  if (isPlaying){
+    stop();
 
+  }
 
   if (grid[cellY][cellX] === 0) {
     grid[cellY][cellX] = 1;
-    mysound.play();
+    mysound[3].play();
   }
   else if (grid[cellY][cellX] === 1) {
     grid[cellY][cellX] = 0;
+    mysound[4].play();
   }
-  // if (grid === 1){
-  // mysound.play();
-  // }
+  
 }
 
 
