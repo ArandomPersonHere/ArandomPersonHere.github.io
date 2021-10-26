@@ -56,10 +56,7 @@ function mousePressed() {
   let cellX = Math.floor(mouseX/ cellWidth);
   let cellY = Math.floor(mouseY/ cellHeight);
 
-  if (isPlaying) {
-    stop();
-
-  }
+ 
 
   if (grid[cellY][cellX] === 0) {
     grid[cellY][cellX] = 1;
