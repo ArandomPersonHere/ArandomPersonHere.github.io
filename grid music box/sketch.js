@@ -10,14 +10,22 @@
 let gridSize = 20;
 let grid;
 let mysound= [];
+let iconArray = [];
 
 
 function preload(){
    
+  //premade sounds
   mysound[1] = loadSound("sound_file/life.wav");
   mysound[2] = loadSound("sound_file/hjm-tesla_sound_shot.wav");
   mysound[3] = loadSound("sound_file/loseSound.wav");
   mysound[4] = loadSound("sound_file/pcp.ogg");
+
+  //images and icons
+  iconArray[1] = loadImage("icon_file/Orbz/Lightless.png");
+  iconArray[2] = loadImage("icon_file/Lightless.png");
+
+
 
 }
 
@@ -77,7 +85,7 @@ function displayGrid(){
   for (let y = 0; y<gridSize; y++){
     for (let x = 0; x<gridSize; x++){
       if (grid[y][x] === 0){
-        fill("yellow");
+        image(iconArray[1],x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
       }
       else if (grid[y][x] === 1){
         fill("red");
