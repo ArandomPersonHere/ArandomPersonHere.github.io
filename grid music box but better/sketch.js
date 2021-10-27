@@ -17,7 +17,7 @@ let monoSynth;
 let velocity = random();
 let time = 0;
 let dur = 1/6;
-let note = random(['Fb4', 'G4']);
+let note = random(["Fb4", "G4"]);
 
 function preload(){
    
@@ -39,6 +39,7 @@ function setup() {
   
   createCanvas(windowWidth, windowHeight);
   grid = createEmpty2DArray(gridSize, gridSize);
+  monoSynth = new p5.MonoSynth();
 }
 
 function draw() {
@@ -58,23 +59,20 @@ function keyPressed(){
   if (key === "r"){
     grid = createRandom2DArray(gridSize, gridSize);
   }
-  if (key === "p"){
-    grid[5][5] = mysound[grid];
-  }
-
+  
 }
 function playSynth() {
   userStartAudio();
 
-  let note = random(['Fb4', 'G4']);
+  //let note = random(['Fb4', 'G4']);
   // note velocity (volume, from 0 to 1)
   let velocity = random();
   // time from now (in seconds)
-  let time = 0;
+  let time = 1;
   // note duration (in seconds)
   let dur = 1/6;
 
- // monoSynth.play(note, velocity, time, dur);
+  // monoSynth.play(note, velocity, time, dur);
 }
 
 function mousePressed() {
@@ -87,12 +85,13 @@ function mousePressed() {
 
   if (grid[cellY][cellX] === 0) {
     grid[cellY][cellX] = 1;
-   // mysound[3].play();
-   monoSynth.play('C4', velocity, time, dur);
+    // mysound[3].play();
+    monoSynth.play("C4", velocity, time, dur);
   }
   else if (grid[cellY][cellX] === 1) {
     grid[cellY][cellX] = 0;
-   // mysound[4].play();
+    monoSynth.play("C4", velocity, time, dur);
+    // mysound[4].play();
   }
   
 }
