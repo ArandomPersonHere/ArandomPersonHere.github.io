@@ -65,8 +65,21 @@ function keyPressed(){
   if (key === "r"){
     grid = createRandom2DArray(gridSize, gridSize);
   }
+  if (key === "P"){
+    linePlayer();
+  }
 
   
+}
+
+function linePlayer(){
+  // reads the first line of of the grid and plays the notes
+  // without changing the tiles
+
+
+
+
+
 }
 
 function playSynth(colorToNote) {
@@ -114,10 +127,14 @@ function mousePressed() {
 
 
 function displayGrid(){
+  let fullGrid = [];
   let cellWidth = width/gridSize;
   let cellHeight = height/gridSize;
   for (let y = 0; y<gridSize; y++){
     for (let x = 0; x<gridSize; x++){
+
+      //make grid icons
+
       if (grid[y][x] === 0){
         image(whiteOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
       }
@@ -134,7 +151,7 @@ function displayGrid(){
     }
 
   }
-
+  return fullGrid;
 }
 
 function createRandom2DArray(rows,cols, numToFill = 0){
