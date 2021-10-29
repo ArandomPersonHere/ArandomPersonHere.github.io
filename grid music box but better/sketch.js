@@ -10,14 +10,14 @@
 let gridSize = 20;
 let grid;
 //let mysound =[];
-let whiteOrb, yellowOrb; 
+let whiteOrb, yellowOrb,greenOrb, blueOrb; 
 let monoSynth;
 
 //attempt at non-premade sounds
-let velocity = random();
+let velocity;
 let time = 0;
 let dur = 1/6;
-let note = random(["Fb4", "G4"]);
+let note;
 
 function preload(){
    
@@ -30,7 +30,8 @@ function preload(){
   //images and icons
   whiteOrb = loadImage("assets/Lightless.png");
   yellowOrb = loadImage("assets/Flameless.png");
-
+  blueOrb = loadImage("assets/BlueOrb.png");
+  greenOrb = loadImage("assets/GreenOrb.png");
 
 
 }
@@ -39,7 +40,12 @@ function setup() {
   
   createCanvas(windowWidth, windowHeight);
   grid = createEmpty2DArray(gridSize, gridSize);
+ 
+
   monoSynth = new p5.MonoSynth();
+  // a simple C scale with C4 = 0
+  note = ["C4", "D4", "E4", "A4", "B4","Fb4", "G4", "C5"];
+  velocity = random();
 }
 
 function draw() {
@@ -59,20 +65,21 @@ function keyPressed(){
   if (key === "r"){
     grid = createRandom2DArray(gridSize, gridSize);
   }
+
   
 }
-function playSynth() {
+
+function playSynth(colorToNote) {
   userStartAudio();
 
-  //let note = random(['Fb4', 'G4']);
   // note velocity (volume, from 0 to 1)
-  let velocity = random();
+  velocity = random();
   // time from now (in seconds)
-  let time = 1;
+  time = 0.1;
   // note duration (in seconds)
-  let dur = 1/6;
+  dur = 1/6;
 
-  // monoSynth.play(note, velocity, time, dur);
+  monoSynth.play(note[colorToNote], velocity, time, dur);
 }
 
 function mousePressed() {
@@ -81,17 +88,25 @@ function mousePressed() {
   let cellX = Math.floor(mouseX/ cellWidth);
   let cellY = Math.floor(mouseY/ cellHeight);
 
- 
+  
 
   if (grid[cellY][cellX] === 0) {
     grid[cellY][cellX] = 1;
     // mysound[3].play();
-    monoSynth.play("C4", velocity, time, dur);
+   
+    playSynth(0);
   }
   else if (grid[cellY][cellX] === 1) {
+    grid[cellY][cellX] = 2;
+    playSynth(1);
+  }
+  else if (grid[cellY][cellX] === 2) {
+    grid[cellY][cellX] = 3;
+    playSynth(2);
+  }
+  else if (grid[cellY][cellX] === 3) {
     grid[cellY][cellX] = 0;
-    monoSynth.play("C4", velocity, time, dur);
-    // mysound[4].play();
+    playSynth(7);
   }
   
 }
@@ -109,7 +124,12 @@ function displayGrid(){
       else if (grid[y][x] === 1){
         image(yellowOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
       }
-
+      else if (grid[y][x] === 2){
+        image(greenOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
+      }
+      else if (grid[y][x] === 3){
+        image(blueOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
+      }
      
     }
 
@@ -122,11 +142,17 @@ function createRandom2DArray(rows,cols, numToFill = 0){
   for (let y = 0; y<rows; y++){
     grid.push([]);
     for (let x = 0; x<cols; x++) {
-      if (random(100) <50){
+      if (random(100) <25){
         grid[y].push(0);
       }
-      else{
+      else if (random(100) <50){
         grid[y].push(1);
+      }
+      else if (random(100) <75){
+        grid[y].push(2);
+      }
+      else{
+        grid[y].push(3);
       }
     }
     
