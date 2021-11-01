@@ -12,6 +12,7 @@ let grid;
 //let mysound =[];
 let whiteOrb, yellowOrb,greenOrb, blueOrb; 
 let monoSynth;
+let gridState = [];
 
 //attempt at non-premade sounds
 let velocity;
@@ -76,7 +77,13 @@ function linePlayer(){
   // reads the first line of of the grid and plays the notes
   // without changing the tiles
 
+  for (let i = 0; i <gridSize; i++){
+    for (let b = 0; b <gridSize;b++){
 
+      playSynth(grid[i][b]);
+      console.log(grid[i][b]);
+    }
+  }
 
 
 
@@ -119,7 +126,7 @@ function mousePressed() {
   }
   else if (grid[cellY][cellX] === 3) {
     grid[cellY][cellX] = 0;
-    playSynth(7);
+    playSynth(6);
   }
   
 }
@@ -127,7 +134,7 @@ function mousePressed() {
 
 
 function displayGrid(){
-  let fullGrid = [];
+  
   let cellWidth = width/gridSize;
   let cellHeight = height/gridSize;
   for (let y = 0; y<gridSize; y++){
@@ -151,7 +158,7 @@ function displayGrid(){
     }
 
   }
-  return fullGrid;
+ 
 }
 
 function createRandom2DArray(rows,cols, numToFill = 0){
