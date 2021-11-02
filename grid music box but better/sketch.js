@@ -10,7 +10,7 @@
 let gridSize = 20;
 let grid;
 //let mysound =[];
-let whiteOrb, yellowOrb,greenOrb, blueOrb; 
+let whiteOrb, yellowOrb,greenOrb, blueOrb, greyOrb, swirlOrb, reallyWhiteOrb; 
 let monoSynth;
 let gridState = [];
 
@@ -32,7 +32,11 @@ function preload(){
   whiteOrb = loadImage("assets/Lightless.png");
   yellowOrb = loadImage("assets/Flameless.png");
   blueOrb = loadImage("assets/BlueOrb.png");
-  greenOrb = loadImage("assets/GreenOrb.png");
+  greenOrb = loadImage("assets/greenOrb.png");
+  greyOrb = loadImage("assets/greYOrb.png");
+  swirlOrb = loadImage("assets/Empty Orb.png");
+  reallyWhiteOrb = loadImage("assets/LightOrb.png");
+
 
 
 }
@@ -45,7 +49,7 @@ function setup() {
 
   monoSynth = new p5.MonoSynth();
   // a simple C scale with C4 = 0
-  note = ["C4", "D4", "E4", "A4", "B4","Fb4", "G4", "C5"];
+  note = ["C4", "D4", "E4", "A4", "B4","Fb4", "G4", "C5", "B3"];
   velocity = random();
 }
 
@@ -113,7 +117,6 @@ function mousePressed() {
   if (grid[cellY][cellX] === 0) {
     grid[cellY][cellX] = 1;
     // mysound[3].play();
-   
     playSynth(0);
   }
   else if (grid[cellY][cellX] === 1) {
@@ -125,8 +128,20 @@ function mousePressed() {
     playSynth(2);
   }
   else if (grid[cellY][cellX] === 3) {
+    grid[cellY][cellX] = 4;
+    playSynth(3);
+  }
+  else if (grid[cellY][cellX] === 4) {
+    grid[cellY][cellX] = 5;
+    playSynth(4);
+  }
+  else if (grid[cellY][cellX] === 5) {
+    grid[cellY][cellX] = 6;
+    playSynth(5);
+  }
+  else if (grid[cellY][cellX] === 6) {
     grid[cellY][cellX] = 0;
-    playSynth(6);
+    playSynth(8);
   }
   
 }
@@ -154,6 +169,15 @@ function displayGrid(){
       else if (grid[y][x] === 3){
         image(blueOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
       }
+      else if (grid[y][x] === 4){
+        image(greyOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
+      }
+      else if (grid[y][x] === 5){
+        image(swirlOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
+      }
+      else if (grid[y][x] === 6){
+        image(reallyWhiteOrb,x *cellWidth, y *cellHeight, cellWidth, cellHeight); 
+      }
      
     }
 
@@ -166,17 +190,26 @@ function createRandom2DArray(rows,cols, numToFill = 0){
   for (let y = 0; y<rows; y++){
     grid.push([]);
     for (let x = 0; x<cols; x++) {
-      if (random(100) <25){
+      if (random(100) <10){
         grid[y].push(0);
       }
-      else if (random(100) <50){
+      else if (random(100) <20){
         grid[y].push(1);
       }
-      else if (random(100) <75){
+      else if (random(100) <30){
         grid[y].push(2);
       }
-      else{
+      else if (random(100) <40){
         grid[y].push(3);
+      }
+      else if (random(100) <50){
+        grid[y].push(4);
+      }
+      else if (random(100) <60){
+        grid[y].push(5);
+      }
+      else{
+        grid[y].push(6);
       }
     }
     
