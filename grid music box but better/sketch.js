@@ -9,10 +9,10 @@
 
 
 // 
-let gridSize = 20;
+let gridSize = 5;
 let grid;
 //let mysound =[];
-
+let circleTimer;
 
 let whiteOrb, yellowOrb, greenOrb,  blueOrb,  greyOrb,  swirlOrb,  reallyWhiteOrb;
 let monoSynth;
@@ -70,20 +70,37 @@ function keyPressed(){
   }
   if (key === "P"){
     linePlayer();
+    circleTimer.reset();
   }
 
   
 }
+class Timer{
+  constructor(waitTime){
+    this.startTime = millis();
+    this.waitTime  = waitTime;
 
+  }
+
+  isDone(){
+    return millis() > this.waitTime + this.startTime;
+  }
+
+  reset(){  
+    this.startTime = millis();
+
+  }
+}
 function linePlayer(){
   // reads the first line of of the grid and plays the notes
   // without changing the tiles
 
   for (let i = 0; i <gridSize; i++){
-    
-    playSynth(grid[i][0]);
-    console.log(grid[i][0]);
-  
+    for (let b = 0; b <gridSize; b++){
+      playSynth(grid[i][b]);
+
+      console.log(grid[i][b]);
+    }
   }
 
 
@@ -154,32 +171,11 @@ function createRandom2DArray(rows,cols, numToFill = 0){
     for (let x = 0; x<cols; x++) {
 
       // one line to save you from if/ifelse pain
-      let num = random(0, 7);
+      let possNotes = [0, 1, 2, 3, 4, 5, 6];
 
-      grid[y].push(num);
+      grid[y].push(random(possNotes));
       // // saves 20 lines
 
-      // if (random(100) <10){
-      //   grid[y].push(0);
-      // }
-      // else if (random(100) <20){
-      //   grid[y].push(1);
-      // }
-      // else if (random(100) <30){
-      //   grid[y].push(2);
-      // }
-      // else if (random(100) <40){
-      //   grid[y].push(3);
-      // }
-      // else if (random(100) <50){
-      //   grid[y].push(4);
-      // }
-      // else if (random(100) < 60){
-      //   grid[y].push(5);
-      // }
-      // else{
-      //   grid[y].push(6);
-      // }
     }
     
   }
