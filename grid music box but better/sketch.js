@@ -5,24 +5,24 @@
 // 3 - have an auto play feature that visually dispays what collum it's playing
 
 
-
-
-
-// 
+//grid sizes 
 let gridSize = 5;
 let grid;
-//let mysound =[];
-let circleTimer;
 
+
+//grid display
 let whiteOrb, yellowOrb, greenOrb,  blueOrb,  greyOrb,  swirlOrb,  reallyWhiteOrb;
 let monoSynth;
 let gridState = [];
 
-//attempt at non-premade sounds
+// non-premade sounds
 let velocity;
 let time = 0;
 let dur = 1/6;
 let note;
+
+//time
+let playTimer;
 
 function preload(){
    
@@ -52,12 +52,14 @@ function setup() {
   // a simple C scale with C4 = 0
   note = [ "A4","B4", "C4", "D4", "E4","F4", "G4","A5", "B5", "C5"];
   velocity = random();
+
+  playTimer = new Timer(2000);
 }
 
 function draw() {
   //background("green");
   displayGrid();
- 
+
 
 }
 
@@ -70,7 +72,7 @@ function keyPressed(){
   }
   if (key === "P"){
     linePlayer();
-    circleTimer.reset();
+    
   }
 
   
@@ -88,18 +90,21 @@ class Timer{
 
   reset(){  
     this.startTime = millis();
-
   }
 }
 function linePlayer(){
-  // reads the first line of of the grid and plays the notes
+  // reads the first line of the grid and plays the notes seperately
   // without changing the tiles
 
   for (let i = 0; i <gridSize; i++){
     for (let b = 0; b <gridSize; b++){
-      playSynth(grid[i][b]);
+     
 
-      console.log(grid[i][b]);
+      if (playTimer.isDone){
+        playSynth(grid[i][b]);
+        console.log(grid[i][b]);
+
+      }
     }
   }
 
@@ -136,6 +141,10 @@ function mousePressed() {
     grid[cellY][cellX] ++;
   }
   //saved 50 lines
+
+
+  //linePlayer?
+  
 }
 
 
