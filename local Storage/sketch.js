@@ -26,7 +26,7 @@ function draw() {
 }
 
 function mousePressed(){
-  clickCount += 10000000000000000000069696969696969696969696969696969696969696969;
+  clickCount += Infinity;
   if (clickCount > getItem("highClicker")) {
     storeItem("highClicker", clickCount);
 
